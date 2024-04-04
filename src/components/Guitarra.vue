@@ -1,4 +1,5 @@
 <script setup>
+import { ref } from 'vue';
 const props = defineProps({
     guitarra: {
         type: Object,
@@ -8,7 +9,13 @@ const props = defineProps({
 
 defineEmits(['agregar-carrito']);
 
-
+const agregado = ref(false);
+const mostrarMensajeCarrito = () => {
+  agregado.value = true;
+  setTimeout(() => {
+    agregado.value = false;
+  }, 2500);
+};
 
 </script>
 
@@ -22,7 +29,10 @@ defineEmits(['agregar-carrito']);
             <h3 class="text-black fs-4 fw-bold text-uppercase">{{ guitarra.nombre }}</h3>
             <p>{{ guitarra.descripcion }}</p>
             <p class="fw-black text-primary fs-3">${{ guitarra.precio }}</p>
-            <button type="button" class="btn btn-dark w-100 " @click="$emit('agregar-carrito', guitarra)" >Agregar al Carrito</button>
+            <button type="button" class="btn btn-dark w-100 " @click="$emit('agregar-carrito', guitarra); mostrarMensajeCarrito()" >Agregar al Carrito</button>
+            <div v-if="agregado" class="mensaje-temporal">
+                <p class="text-center m-0">Se agrego al carrito correctamente</p>
+            </div>
         </div>
     </div><!-- FIN GUITARRA -->
 </template>
