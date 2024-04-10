@@ -37,7 +37,7 @@ const guardarLocalStorage = () => {
 
 const agregarCarrito = (guitarra) => {
     const existeCarrito = carrito.value.findIndex(producto => producto.id === guitarra.id)
-    mostrarMensajeCarrito
+    mostrarMensajeCarrito()
     console.log(existeCarrito)
     if (existeCarrito >= 0) {
         carrito.value[existeCarrito].cantidad++
